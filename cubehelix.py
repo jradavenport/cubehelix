@@ -3,7 +3,7 @@ from matplotlib.colors import LinearSegmentedColormap as LSC
 from math import pi
 import numpy as np
 
-def cmap(start=0.5, rot=-1.5, gamma=1.0, hue=1.2, reverse=False):
+def cmap(start=0.5, rot=-1.5, gamma=1.0, hue=1.2, reverse=False, nlev=256.):
     """
     A full implementation of Dave Green's "cubehelix" for Matplotlib.
     Based on the FORTRAN 77 code provided in 
@@ -40,6 +40,9 @@ def cmap(start=0.5, rot=-1.5, gamma=1.0, hue=1.2, reverse=False):
     reverse : boolean, optional
         Set to True to reverse the color map. Will go from black to
         white. Good for density plots where shade~density. Defaults to False
+    nevl : scalar, optional
+        Defines the number of discrete levels to render colors at.
+        Defaults to 256.
 
     Returns
     -------
@@ -53,12 +56,10 @@ def cmap(start=0.5, rot=-1.5, gamma=1.0, hue=1.2, reverse=False):
 
     Revisions
     ---------
-    2014-04-16 (jradavenport) Ported from IDL version
+    2014-04 (@jradavenport) Ported from IDL version
     """
 
-    nlev = 256.
-
-#-- set up the parameters
+ #-- set up the parameters
     fract = np.arange(nlev)/(nlev-1.)
     angle = 2.0*pi * (start/3.0 + 1.0 + rot*fract)
     fract = fract**gamma
