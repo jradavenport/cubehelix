@@ -22,6 +22,10 @@ Usage
 Installation
 ------------
 
+Download:
+
+- Place cubehelix.py in your Python path.
+
 From source::
 
    setup.py install
