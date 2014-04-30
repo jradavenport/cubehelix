@@ -3,7 +3,7 @@ from matplotlib.colors import LinearSegmentedColormap as LSC
 from math import pi
 import numpy as np
 
-def cmap(start=0.5, rot=-1.5, gamma=1.0, hue=1.2, reverse=False, nlev=256.):
+def cmap(start=0.5, rot=-1.5, gamma=1.0, sat=1.2, reverse=False, nlev=256., **kwargs):
     """
     A full implementation of Dave Green's "cubehelix" for Matplotlib.
     Based on the FORTRAN 77 code provided in 
@@ -35,14 +35,26 @@ def cmap(start=0.5, rot=-1.5, gamma=1.0, hue=1.2, reverse=False, nlev=256.):
         correspond to Blue->Red direction. Defaults to -1.5
     gamma : scalar, optional
         The gamma correction for intensity. Defaults to 1.0        
-    hue : scalar, optional
-        The hue intensity factor. Defaults to 1.2
+    sat : scalar, optional
+        The saturation intensity factor. Defaults to 1.2
+        NOTE: this was formally known as "hue" parameter
     reverse : boolean, optional
         Set to True to reverse the color map. Will go from black to
         white. Good for density plots where shade~density. Defaults to False
-    nevl : scalar, optional
+    nlev : scalar, optional
         Defines the number of discrete levels to render colors at.
         Defaults to 256.
+
+    kwargs
+    ----------
+    startHue : scalar, optional
+        Sets the starting color, ranging from [0,360], as in 
+        D3 version by @mbostock
+        NOTE: overrides values in start= parameter
+    endHue : scalar, optional
+        Sets the ending color, ranging from [0,360], as in 
+        D3 version by @mbostock
+        NOTE: overrides values in rot= parameter
 
     Returns
     -------
@@ -57,13 +69,23 @@ def cmap(start=0.5, rot=-1.5, gamma=1.0, hue=1.2, reverse=False, nlev=256.):
     Revisions
     ---------
     2014-04 (@jradavenport) Ported from IDL version
+    2014-04 (@jradavenport) Added kwargs to enable similar to D3 version, 
+                            changed name of "hue" parameter to "sat"
     """
+
+#-- override start and rot if startHue and endHue are set
+    if kwargs is not None:
+        if 'startHue' in kwargs:
+            start = (kwargs.get('startHue')/360. -1.)*3.
+        if 'endHue' in kwargs:
+            rot = kwargs.get('endHue')/360. -1. -start/3. 
+
 
  #-- set up the parameters
     fract = np.arange(nlev)/(nlev-1.)
     angle = 2.0*pi * (start/3.0 + 1.0 + rot*fract)
     fract = fract**gamma
-    amp   = hue*fract*(1.-fract)/2.
+    amp   = sat*fract*(1.-fract)/2.
 
 #-- compute the RGB vectors according to main equations
     red   = fract+amp*(-0.14861*np.cos(angle)+1.78277*np.sin(angle))
