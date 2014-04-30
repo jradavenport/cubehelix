@@ -3,7 +3,9 @@ from matplotlib.colors import LinearSegmentedColormap as LSC
 from math import pi
 import numpy as np
 
-def cmap(start=0.5, rot=-1.5, gamma=1.0, sat=1.2, reverse=False, nlev=256., **kwargs):
+def cmap(start=0.5, rot=-1.5, gamma=1.0, sat=1.2, 
+         reverse=False, nlev=256., minSat=0., maxSat=1.,
+         **kwargs):
     """
     A full implementation of Dave Green's "cubehelix" for Matplotlib.
     Based on the FORTRAN 77 code provided in 
@@ -44,6 +46,10 @@ def cmap(start=0.5, rot=-1.5, gamma=1.0, sat=1.2, reverse=False, nlev=256., **kw
     nlev : scalar, optional
         Defines the number of discrete levels to render colors at.
         Defaults to 256.
+    minSat : scalar, optional
+        Sets the minimum-level saturation. Defaults to 0.
+    maxSat : scalar, optional
+        Sets the maximum-level saturation. Defaults to 1.
 
     kwargs
     ----------
@@ -82,7 +88,7 @@ def cmap(start=0.5, rot=-1.5, gamma=1.0, sat=1.2, reverse=False, nlev=256., **kw
 
 
  #-- set up the parameters
-    fract = np.arange(nlev)/(nlev-1.)
+    fract = np.arange(nlev)/(nlev-1.)*(maxSat-minSat) + minSat
     angle = 2.0*pi * (start/3.0 + 1.0 + rot*fract)
     fract = fract**gamma
     amp   = sat*fract*(1.-fract)/2.
