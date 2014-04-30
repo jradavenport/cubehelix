@@ -80,7 +80,7 @@ def cmap(start=0.5, rot=-1.5, gamma=1.0, reverse=False, nlev=256.,
                             changed name of "hue" parameter to "sat"
     """
 
-#-- override start and rot if startHue and endHue are set
+# override start and rot if startHue and endHue are set
     if kwargs is not None:
         if 'startHue' in kwargs:
             start = (kwargs.get('startHue')/360. - 1.)*3.
@@ -90,7 +90,7 @@ def cmap(start=0.5, rot=-1.5, gamma=1.0, reverse=False, nlev=256.,
             minSat = kwargs.get('sat')
             maxSat = kwargs.get('sat')
 
- #-- set up the parameters
+# set up the parameters
     fract = np.linspace(minLight, maxLight, nlev)
     angle = 2.0*pi*(start/3.0 + rot*fract + 1.)
     fract = fract**gamma
@@ -98,12 +98,12 @@ def cmap(start=0.5, rot=-1.5, gamma=1.0, reverse=False, nlev=256.,
     satar = np.linspace(minSat, maxSat, nlev)
     amp = satar*fract*(1. - fract)/2.
 
-#-- compute the RGB vectors according to main equations
+# compute the RGB vectors according to main equations
     red = fract + amp*(-0.14861*np.cos(angle) + 1.78277*np.sin(angle))
     grn = fract + amp*(-0.29227*np.cos(angle) - 0.90649*np.sin(angle))
     blu = fract + amp*(1.97294*np.cos(angle))
 
-#-- find where RBB are outside the range [0,1], clip
+# find where RBB are outside the range [0,1], clip
     red[np.where((red > 1.))] = 1.
     grn[np.where((grn > 1.))] = 1.
     blu[np.where((blu > 1.))] = 1.
@@ -112,13 +112,13 @@ def cmap(start=0.5, rot=-1.5, gamma=1.0, reverse=False, nlev=256.,
     grn[np.where((grn < 0.))] = 0.
     blu[np.where((blu < 0.))] = 0.
 
-#-- optional color reverse
+# optional color reverse
     if reverse is True:
         red = red[::-1]
         blu = blu[::-1]
         grn = grn[::-1]
 
-#-- put in to tuple & dictionary structures needed
+# put in to tuple & dictionary structures needed
     rr = []
     bb = []
     gg = []
