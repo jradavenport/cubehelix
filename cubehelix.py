@@ -53,11 +53,11 @@ def cmap(start=0.5, rot=-1.5, gamma=1.0, reverse=False, nlev=256.,
     startHue : scalar, optional
         Sets the starting color, ranging from [0, 360], as in
         D3 version by @mbostock
-        NOTE: overrides values in start= parameter
+        NOTE: overrides values in start parameter
     endHue : scalar, optional
         Sets the ending color, ranging from [0, 360], as in
         D3 version by @mbostock
-        NOTE: overrides values in rot= parameter
+        NOTE: overrides values in rot parameter
     minLight : scalar, optional
         Sets the minimum lightness value. Defaults to 0.
     maxLight : scalar, optional
@@ -70,8 +70,12 @@ def cmap(start=0.5, rot=-1.5, gamma=1.0, reverse=False, nlev=256.,
     Example
     -------
     >>> import cubehelix
+    >>> import matplotlib.pyplot as plt
+    >>> import numpy as np
+    >>> x = np.random.randn(1000)
+    >>> y = np.random.randn(1000)
     >>> cx = cubehelix.cmap(start=0., rot=-0.5)
-    >>> plot(x, cmap=cx)
+    >>> plt.hexbin(x, y, gridsize=50, cmap=cx)
 
     Revisions
     ---------
