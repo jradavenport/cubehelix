@@ -3,8 +3,8 @@ from matplotlib.colors import LinearSegmentedColormap as LSC
 from math import pi
 import numpy as np
 
-def cmap(start=0.5, rot=-1.5, gamma=1.0, sat=1.2, 
-         reverse=False, nlev=256., minSat=0., maxSat=1.,
+def cmap(start=0.5, rot=-1.5, gamma=1.0,reverse=False, nlev=256.,
+         minSat=1.2, maxSat=1.2, minLight=0., maxLight=1.,
          **kwargs):
     """
     A full implementation of Dave Green's "cubehelix" for Matplotlib.
@@ -37,22 +37,19 @@ def cmap(start=0.5, rot=-1.5, gamma=1.0, sat=1.2,
         correspond to Blue->Red direction. Defaults to -1.5
     gamma : scalar, optional
         The gamma correction for intensity. Defaults to 1.0        
-    sat : scalar, optional
-        The saturation intensity factor. Defaults to 1.2
-        NOTE: this was formally known as "hue" parameter
     reverse : boolean, optional
         Set to True to reverse the color map. Will go from black to
         white. Good for density plots where shade~density. Defaults to False
     nlev : scalar, optional
         Defines the number of discrete levels to render colors at.
         Defaults to 256.
+    sat : scalar, optional
+        The saturation intensity factor. Defaults to 1.2
+        NOTE: this was formally known as "hue" parameter
     minSat : scalar, optional
-        Sets the minimum-level saturation. Defaults to 0.
+        Sets the minimum-level saturation. Defaults to 1.2
     maxSat : scalar, optional
-        Sets the maximum-level saturation. Defaults to 1.
-
-    kwargs
-    ----------
+        Sets the maximum-level saturation. Defaults to 1.2
     startHue : scalar, optional
         Sets the starting color, ranging from [0,360], as in 
         D3 version by @mbostock
@@ -61,6 +58,10 @@ def cmap(start=0.5, rot=-1.5, gamma=1.0, sat=1.2,
         Sets the ending color, ranging from [0,360], as in 
         D3 version by @mbostock
         NOTE: overrides values in rot= parameter
+    minLight : scalar, optional
+        Sets the minimum lightness value. Defaults to 0.
+    maxLight : scalar, optional
+        Sets the maximum lightness value. Defaults to 1.
 
     Returns
     -------
@@ -85,13 +86,17 @@ def cmap(start=0.5, rot=-1.5, gamma=1.0, sat=1.2,
             start = (kwargs.get('startHue')/360. -1.)*3.
         if 'endHue' in kwargs:
             rot = kwargs.get('endHue')/360. -1. -start/3. 
-
+        if 'sat' in kwargs:
+            minSat = kwargs.get('sat')
+            maxSat = kwargs.get('sat')
 
  #-- set up the parameters
-    fract = np.arange(nlev)/(nlev-1.)*(maxSat-minSat) + minSat
+    fract = np.linspace(minLight, maxLight, nlev)
     angle = 2.0*pi * (start/3.0 + 1.0 + rot*fract)
     fract = fract**gamma
-    amp   = sat*fract*(1.-fract)/2.
+
+    satar = np.linspace(minSat, maxSat, nlev)
+    amp   = satar*fract*(1.-fract)/2.
 
 #-- compute the RGB vectors according to main equations
     red   = fract+amp*(-0.14861*np.cos(angle)+1.78277*np.sin(angle))

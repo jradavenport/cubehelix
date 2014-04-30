@@ -11,6 +11,7 @@ A few simple example flavors of cubehelix:
 - Default color map settings produce the standard "cubehelix": ``cubehelix.cmap()``.
 - Create color map in only blues: ``cubehelix.cmap(rot=0, start=0)``.
 - Create reverse (white to black) backwards through the rainbow once: ``cubehelix.cmap(rot=1, reverse=True)``.
+- Similar to Matteo Niccoli’s perceptual rainbow: ``cubehelix.cmap(startHue=300,endHue=-300,minSat=.7.,maxSat=2.,minLight=.35,maxLight=.8,gamma=1.2)``.
 
 
 Basic Usage
