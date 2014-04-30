@@ -17,9 +17,9 @@ A few simple example flavors of cubehelix:
 Basic Usage
 -----
 
-    import cubehelix
-    cx = cubehelix.cmap(start=0., rot=-0.5)
-    plot(x,cmap=cx)
+>>> import cubehelix
+>>> cx = cubehelix.cmap(start=0., rot=-0.5)
+>>> plot(x,cmap=cx)
 
 
 Installation
