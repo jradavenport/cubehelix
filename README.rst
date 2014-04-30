@@ -4,7 +4,7 @@ cubehelix
 A full implementation of Dave Green's `cubehelix <http://adsabs.harvard.edu/abs/2011arXiv1108.5083G>`_ colormap for Python.
 
 The user can adjust all parameters of the cubehelix algorithm. 
-This enables much greater flexibility in choosing color maps, while (be default) ensuring the color map scales in intensity from black to white.
+This enables much greater flexibility in choosing color maps, while (by default) ensuring the color map scales in brightness from black to white.
 
 A few simple example flavors of cubehelix:
 
