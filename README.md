@@ -17,6 +17,9 @@ A few simple example flavors of cubehelix:
 ![A nice blue cubehelix scheme](http://i.imgur.com/Kub0kgA.png)
 - Similar to Matteo Niccoli’s perceptual rainbow: ``cubehelix.cmap(startHue=240,endHue=-300,minSat=1,maxSat=2.5,minLight=.3,maxLight=.8,gamma=.9)``
 
+![a better rainbow](http://i.imgur.com/XXM1r6f.png)
+
+
 Discussion and examples shown on my blog: [If We Assume](http://www.ifweassume.com/2014/04/cubehelix-colormap-for-python.html)
 
 Basic Usage
