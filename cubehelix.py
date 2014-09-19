@@ -45,7 +45,7 @@ def cmap(start=0.5, rot=-1.5, gamma=1.0, reverse=False, nlev=256.,
         Defaults to 256.
     sat : scalar, optional
         The saturation intensity factor. Defaults to 1.2
-        NOTE: this was formally known as "hue" parameter
+        NOTE: this was formerly known as "hue" parameter
     minSat : scalar, optional
         Sets the minimum-level saturation. Defaults to 1.2
     maxSat : scalar, optional
