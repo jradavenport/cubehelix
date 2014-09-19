@@ -15,7 +15,7 @@ A few simple example flavors of cubehelix:
 - Create reverse (white to black) backwards through the rainbow once: ``cubehelix.cmap(rot=1, reverse=True)`` 
 
 ![A nice blue cubehelix scheme](http://i.imgur.com/Kub0kgA.png)
-- Similar to Matteo Niccoli’s perceptual rainbow: ``cubehelix.cmap(startHue=240,endHue=-300,minSat=1,maxSat=2.5,minLight=.3,maxLight=.8,gamma=.9)``
+- Similar to [Matteo Niccoli’s perceptual rainbow](http://mycarta.wordpress.com/2013/02/21/perceptual-rainbow-palette-the-method/): ``cubehelix.cmap(startHue=240,endHue=-300,minSat=1,maxSat=2.5,minLight=.3,maxLight=.8,gamma=.9)``
 
 ![a better rainbow](http://i.imgur.com/XXM1r6f.png)
 
