@@ -15,7 +15,7 @@ setup(
     author="James Davenport",
     # author_email="",
     description="Cubehelix colormaps for matplotlib",
-    long_description=read('README.rst'),
+    long_description=read('README.md'),
     # license="BSD",
     py_modules=['cubehelix'],
     classifiers=[
