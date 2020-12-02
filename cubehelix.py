@@ -95,11 +95,11 @@ def cmap(start=0.5, rot=-1.5, gamma=1.0, reverse=False, nlev=256.,
             maxSat = kwargs.get('sat')
 
 # set up the parameters
-    fract = np.linspace(minLight, maxLight, nlev)
+    fract = np.linspace(minLight, maxLight, int(nlev))
     angle = 2.0 * pi * (start / 3.0 + rot * fract + 1.)
     fract = fract**gamma
 
-    satar = np.linspace(minSat, maxSat, nlev)
+    satar = np.linspace(minSat, maxSat, int(nlev))
     amp = satar * fract * (1. - fract) / 2.
 
 # compute the RGB vectors according to main equations
